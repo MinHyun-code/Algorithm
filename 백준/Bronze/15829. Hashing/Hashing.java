@@ -23,9 +23,9 @@ public class Main {
 		int num = Integer.parseInt(br.readLine());
 		String str = br.readLine();
 
-		int[] arr = new int[num];
-		int sum = 0;
-		int r = 1;
+		long[] arr = new long[num];
+		long sum = 0;
+		long r = 1;
 		int prime = 1234567891;
 		
 		for(int i=0; i<num; i++) {
