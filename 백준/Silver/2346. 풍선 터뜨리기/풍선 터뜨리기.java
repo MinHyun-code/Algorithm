@@ -1,54 +1,69 @@
-import java.util.*;
-
-class Balloon_2346 {
-	int index; // 풍선 번호
-	int value; // 적혀있는 값
-	
-	public Balloon_2346(int index, int value) {
-		this.index=index;
-		this.value=value;
-	}
-}
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.StringTokenizer;
 
 public class Main {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Scanner sc=new Scanner(System.in);
-		int n=sc.nextInt();
-		Deque<Balloon_2346> dq=new ArrayDeque<>();
-		StringBuilder sb=new StringBuilder();
+	public static void main(String[] args) throws IOException{
 		
-		// 풍선의 번호를 늘려가며 적혀있는 번호 저장
-		for(int i=1;i<=n;i++) {
-			int value=sc.nextInt();
-			dq.add(new Balloon_2346(i,value));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		StringBuilder sb = new StringBuilder();
+				
+		int N = Integer.parseInt(br.readLine());
+
+		st = new StringTokenizer(br.readLine());
+		
+		Deque<Balloon> list = new ArrayDeque<Balloon>();
+		
+		for(int i=1; i<=N; i++) {
+			int num = Integer.parseInt(st.nextToken());
+			list.add(new Balloon(i, num));
 		}
+		
+		
+		while(!list.isEmpty()) {
+
+			sb.append(list.getFirst().index).append(" ");
 			
-		while(!dq.isEmpty()) {
-			// 덱의 제일 앞에있는 풍선의 번호를 저장
-			sb.append(dq.getFirst().index+" ");
-			
-			// 제일 앞에있는 풍선을 꺼낸 후, 적혀있는 값 저장
-			int next=dq.poll().value; 
-			
-			// 남아있는 풍선이 없다면 종료
-			if(dq.isEmpty())
+			// 첫번째 풍선을 꺼낸 후 적혀있는 값 저장
+			int next = list.poll().value;
+		
+			if(list.isEmpty()) {
 				break;
-			
-			// 적혀있는 값이 양수인 경우
-			if(next>0) {
-				for(int i=0;i<next-1;i++)
-					dq.addLast(dq.pollFirst());
 			}
-			// 적혀있는 값이 음수인 경우
+			
+			/*
+			 * 간단하게 생각하면 다음 순번의 값을 맨 앞에 두기위해 list 순서 조정한다는 느낌
+			 */
+			
+			// 양수인 경우
+			if(next > 0) {
+				for(int i=0; i<next-1; i++) {
+					list.addLast(list.pollFirst());
+				}
+			}
+			
+			// 음수인 경우
 			else {
-				for(int i=0;i<Math.abs(next);i++)
-					dq.addFirst(dq.pollLast());
+				for(int i=0; i<Math.abs(next); i++) {
+					list.addFirst(list.pollLast());
+				}
 			}
 		}
-		
 		System.out.println(sb);
 	}
+}
 
+class Balloon {
+	int index;	// 순번
+	int value;	// 값
+	
+	public Balloon(int index, int value) {
+		this.index = index;
+		this.value = value;
+	}
 }
