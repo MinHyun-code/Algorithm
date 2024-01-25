@@ -10,8 +10,8 @@ public class Main {
 	
 	static int N;
 	static int M;
-	static int[] arrN;
-	static int[] arrM;
+	static long[] arrN;
+	static long[] arrM;
 	
 	public static void main(String[] args) throws IOException{
 		
@@ -22,20 +22,20 @@ public class Main {
 		N = Integer.parseInt(br.readLine());	// 도시 수
 		M = N-1;								// 도로 수
 		
-		arrN = new int[N+1];					// 도시별 기름 가격
-		arrM = new int[M+1];					// 도로의 길이 배열
+		arrN = new long[N+1];					// 도시별 기름 가격
+		arrM = new long[M+1];					// 도로의 길이 배열
 		
 		st = new StringTokenizer(br.readLine());
 		for(int i=1; i<=M; i++) {
-			arrM[i] = Integer.parseInt(st.nextToken());
+			arrM[i] = Long.parseLong(st.nextToken());
 		}
 
 		st = new StringTokenizer(br.readLine());
 		for(int i=1; i<=N; i++) {
-			arrN[i] = Integer.parseInt(st.nextToken());	
+			arrN[i] = Long.parseLong(st.nextToken());	
 		}
 		
-		int minCost = arrN[1];
+		long minCost = arrN[1];
 		long amt = 0;
 		
 		for(int i=1; i<=N-1; i++) {
