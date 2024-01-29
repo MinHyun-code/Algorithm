@@ -59,8 +59,6 @@ public class Main {
 			if(tempArr[i] != firstArr[i]) {
 				falseCnt += Math.abs(tempArr[i] - firstArr[i]);
 				
-				// 3개 이상 차이날 경우 비슷 X
-				// 2개 차이날 때, 문자의 개수가 같으면 통과
 				if(falseCnt > 2) {
 					sameTF = false;
 					break;
